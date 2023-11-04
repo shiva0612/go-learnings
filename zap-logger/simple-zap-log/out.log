@@ -1,0 +1,13 @@
+2023-08-31 08:59:13	error	simple-zap-log/main.go:31	errof shiva
+main.main
+	/Users/kamarapushivachandra/Desktop/coding/go-learnings/zap-logger/simple-zap-log/main.go:31
+runtime.main
+	/Users/kamarapushivachandra/Downloads/softwares/goroot_1.19/src/runtime/proc.go:250
+2023-08-31 08:59:56	info	simple-zap-log/main.go:26	infoln
+2023-08-31 08:59:56	info	simple-zap-log/main.go:29	infof shiva
+2023-08-31 08:59:56	error	simple-zap-log/main.go:31	errof shiva
+main.main
+	/Users/kamarapushivachandra/Desktop/coding/go-learnings/zap-logger/simple-zap-log/main.go:31
+runtime.main
+	/Users/kamarapushivachandra/Downloads/softwares/goroot_1.19/src/runtime/proc.go:250
+2023-08-31 08:59:56	warn	simple-zap-log/main.go:33	warning

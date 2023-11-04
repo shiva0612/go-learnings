@@ -1,0 +1,13 @@
+package main
+
+import "fmt"
+
+func get() interface{} {
+	return "shiva"
+}
+
+func main() {
+	var oldVar string
+	oldVar = get()
+	fmt.Println(oldVar)
+}

@@ -1,0 +1,68 @@
+package main
+
+import (
+	"fmt"
+	"reflect"
+)
+
+func ListGet(list interface{}, i int32) interface{} {
+	listValue := reflect.ValueOf(list)
+
+	if listValue.Kind() != reflect.Slice {
+		panic("list is not a slice")
+	}
+
+	if i < 0 || i >= int32(listValue.Len()) {
+		panic("index out of range")
+	}
+
+	elementValue := listValue.Index(int(i))
+	return elementValue.Interface()
+}
+
+func call_test_arg_string(a string) {
+
+}
+
+func call_test_arg_int(a int) {
+
+}
+
+func return_test_string() string {
+	return ListGet([]string{"aa", "bb"}, 0)
+}
+
+func return_test_int() int {
+	return ListGet([]int{11, 22}, 0)
+}
+
+func main() {
+	list_int := []int{1, 2, 3}
+	var test_int int
+	test_int = ListGet(list_int, 0)
+	fmt.Println(test_int)
+
+	list_string := []string{"a", "b"}
+	var test_string string
+	test_string = ListGet(list_string, 0)
+	fmt.Println(test_string)
+
+	someVar := "a"
+	if someVar == ListGet(list_string, 0) {
+		fmt.Println("yes its fine 1")
+	}
+	if ListGet(list_string, 0) == "a" {
+		fmt.Println("yes its fine 2")
+	}
+	if ListGet(list_int, 0) == 1 {
+		fmt.Println("yes its fine 3")
+	}
+
+	call_test_arg_string(ListGet(list_string, 0))
+	call_test_arg_int(ListGet(list_int, 0))
+
+	var a_string string
+	var a_int int
+	a_string = return_test_string()
+	a_int = return_test_int()
+}

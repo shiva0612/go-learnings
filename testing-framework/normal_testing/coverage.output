@@ -1,0 +1,7 @@
+mode: set
+go-basics/testing-framework/normal_testing/calc.go:5.24,7.2 1 1
+go-basics/testing-framework/normal_testing/calc.go:9.29,11.17 2 0
+go-basics/testing-framework/normal_testing/calc.go:14.2,14.15 1 0
+go-basics/testing-framework/normal_testing/calc.go:11.17,13.3 1 0
+go-basics/testing-framework/normal_testing/calc.go:17.17,19.2 1 0
+go-basics/testing-framework/normal_testing/calc.go:21.16,23.2 1 0

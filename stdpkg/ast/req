@@ -1,0 +1,43 @@
+package main
+
+import (
+	"reflect"
+)
+
+func ListGet(list []interface{}, i int32) interface{} {
+	listValue := reflect.ValueOf(list)
+
+	if listValue.Kind() != reflect.Slice {
+		panic("list is not a slice")
+	}
+
+	if i < 0 || i >= int32(listValue.Len()) {
+		panic("index out of range")
+	}
+
+	elementValue := listValue.Index(int(i))
+	return elementValue.Interface()
+}
+
+func main() {
+	a := []int{1, 2, 3}
+	var b int
+	b = ListGet(a, 0)
+	fmt.Println(b)
+
+	aa := []string{"a", "b"}
+	var bb string
+	bb = ListGet(aa, 0)
+	fmt.Println(bb)
+
+	if someVar == lib.ListGet(liRedirectData, 9) {
+	}
+	if lib.ListGet(liRedirectData, 9) == "" {
+	}
+	if lib.ListGet(liRedirectData, 9) == 9 {
+	}
+	if lib.ListGet(liRedirectData, 9) == 9.0 {
+	}
+	if "something" == lib.ListGet(liRedirectData, 9) {
+	}
+}

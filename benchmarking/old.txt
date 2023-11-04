@@ -1,0 +1,10 @@
+goos: darwin
+goarch: arm64
+pkg: go-basics/benchmarking
+BenchmarkStats-8   	27452624	        74.35 ns/op	      34 B/op	       3 allocs/op
+BenchmarkStats-8   	32045806	        74.13 ns/op	      34 B/op	       3 allocs/op
+BenchmarkStats-8   	31912629	        77.96 ns/op	      34 B/op	       3 allocs/op
+BenchmarkStats-8   	31162069	        75.19 ns/op	      34 B/op	       3 allocs/op
+BenchmarkStats-8   	31741920	        75.72 ns/op	      34 B/op	       3 allocs/op
+PASS
+ok  	go-basics/benchmarking	12.488s
