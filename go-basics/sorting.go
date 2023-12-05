@@ -18,5 +18,5 @@ func sorting() {
 		return a[i][1] < a[j][1]
 	})
 
-	fmt.Println(a) // Display the sorted slice of slices
+	fmt.Println(a)
 }
