@@ -6,6 +6,28 @@ import (
 	"lukechampine.com/uint128"
 )
 
+func uint_from_string(a string) (uint128.Uint128, error) {
+	a = strings.TrimLeft(a, "0")
+	return uint128.FromString(a)
+}
+
+func getMaxLen(a, b string) int {
+	lena := len(a)
+	lenb := len(b)
+	if lena > lenb {
+		return lena
+	}
+	return lenb
+}
+func getMaxLenUint128(a, b uint128.Uint128) int {
+	lena := len(a.String())
+	lenb := len(b.String())
+	if lena > lenb {
+		return lena
+	}
+	return lenb
+}
+
 func OverFlow(sum, a uint128.Uint128, b string) bool {
 	slen, alen, blen := len(sum.String()), len(a.String()), len(b)
 	if alen > blen {
@@ -30,11 +52,11 @@ func add_fraction(a, b string) (string, bool) {
 	no_of_zeros := len(b) - len(strings.TrimLeft(b, "0"))
 
 	la := a[:no_of_zeros]
-	laint, _ := uint128.FromString(la)
+	laint, _ := uint_from_string(la)
 	ra, rb := a[no_of_zeros:], b[no_of_zeros:]
 	ra, rb = matchLength(ra, rb)
-	raint, _ := uint128.FromString(ra)
-	rbint, _ := uint128.FromString(rb)
+	raint, _ := uint_from_string(ra)
+	rbint, _ := uint_from_string(rb)
 	sumr := raint.Add(rbint)
 	if OverFlow(sumr, raint, rbint.String()) {
 		suml := laint.Add64(1)
@@ -83,14 +105,6 @@ func removeFirstDigit(num uint64) int64 {
 	result := num % numDigits
 	return int64(result)
 }
-func getMaxLen(a, b uint128.Uint128) int {
-	lena := len(a.String())
-	lenb := len(b.String())
-	if lena > lenb {
-		return lena
-	}
-	return lenb
-}
 
 func get_input(dividend, divisor string) (Decimal, uint128.Uint128) {
 	divid := Decimal{}
@@ -98,12 +112,12 @@ func get_input(dividend, divisor string) (Decimal, uint128.Uint128) {
 
 	index := strings.IndexByte(dividend, '.')
 	if index != -1 {
-		divid.V, _ = uint128.FromString(dividend[:index])
+		divid.V, _ = uint_from_string(dividend[:index])
 		divid.F = dividend[index+1:]
 	} else {
-		divid.V, _ = uint128.FromString(dividend)
+		divid.V, _ = uint_from_string(dividend)
 		divid.F = "0"
 	}
-	divis, _ = uint128.FromString(divisor)
+	divis, _ = uint_from_string(divisor)
 	return divid, divis
 }

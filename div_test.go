@@ -22,8 +22,9 @@ func TestDiv(t *testing.T) {
 		// {"1000000000000000000000", "2", "500000000000000000000", "000"},
 		// {"0", "123123123", "0", "000"},
 		// {"123123123.123123123", "1", "123123123", "123"},
-		{"38612.9032", "30", "1287", "096"},
 		// {"83703.168", "678", "123", "456"},
+		{"38612.9032", "30", "1287", "096"},
+		// {"36.1", "4", "9", "025"},
 	}
 
 	for _, test_ip := range cases {
@@ -56,19 +57,29 @@ func TestAddFraction(t *testing.T) {
 
 	cases := []TC{
 		{
-			"21", "0156", "2256", false,
-		},
-		{
 			"29", "0156", "3056", false,
 		},
 		{
 			"99", "0156", "0056", true,
 		},
+		{
+			"12", "12", "24", false,
+		},
+		{
+			"91", "91", "82", true,
+		},
+		{"21", "0156", "2256", false},
+		{"012", "12", "132", false},
+		{"12", "012", "132", false},
+		{"09", "01", "10", false},
+		{"009", "001", "010", false},
+		{"002", "003", "005", false},
+		{"001", "0012", "0022", false},
 	}
 
 	for _, test_case := range cases {
 		t.Run(fmt.Sprintf("%s+%s", test_case.first, test_case.second), func(t *testing.T) {
-			got, overflow := add_fraction(test_case.first, test_case.second)
+			got, overflow := add_fraction2(test_case.first, test_case.second)
 			assert.Equal(t, test_case.ans, got)
 			assert.Equal(t, test_case.overflow, overflow)
 		})
@@ -87,4 +98,25 @@ func TestMatchLength(t *testing.T) {
 	assert.Equal(t, "1400", gota)
 	assert.Equal(t, "2355", gotb)
 
+}
+
+func TestCustomDiv(t *testing.T) {
+
+	cases := []TestCase{
+		{"38612", "30", "1287", "066"},
+		{"9032", "30", "301", "066"},
+	}
+
+	for _, test_ip := range cases {
+		t.Run(fmt.Sprintf("%s/%s=%s.%s", test_ip.dividend, test_ip.divisor, test_ip.q, test_ip.r), func(t *testing.T) {
+			divid, divis := get_input(test_ip.dividend, test_ip.divisor)
+			q, r, err := custom_div(divid.V, divis, 3, 2)
+			if err != nil {
+				t.Fail()
+				t.Log(err.Error())
+			}
+			assert.Equal(t, test_ip.q, q.String())
+			assert.Equal(t, test_ip.r, r)
+		})
+	}
 }
